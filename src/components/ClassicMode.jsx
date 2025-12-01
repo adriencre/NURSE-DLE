@@ -179,13 +179,15 @@ function ClassicMode() {
                   <p>Sélectionnez une pathologie pour commencer</p>
                 </div>
               )}
-              {guesses.map((guess, index) => (
-                <GuessRow
-                  key={index}
-                  guess={guess}
-                  answer={targetPathology}
-                />
-              ))}
+              <div className="guesses-rows">
+                {guesses.map((guess, index) => (
+                  <GuessRow
+                    key={index}
+                    guess={guess}
+                    answer={targetPathology}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

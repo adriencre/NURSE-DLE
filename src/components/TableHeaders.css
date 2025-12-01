@@ -1,0 +1,15 @@
+.table-headers {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .table-headers {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+

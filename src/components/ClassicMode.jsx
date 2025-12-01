@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Lightbulb, Stethoscope, Pill } from 'lucide-react';
 import SearchBar from './SearchBar';
 import GuessRow from './GuessRow';
 import TableHeaders from './TableHeaders';
@@ -13,6 +14,7 @@ function ClassicMode() {
   const [guesses, setGuesses] = useState([]);
   const [isWon, setIsWon] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [unlockedHints, setUnlockedHints] = useState({ 5: false, 10: false, 15: false });
 
   // Charger la pathologie du jour et l'état sauvegardé
   useEffect(() => {
@@ -29,6 +31,13 @@ function ClassicMode() {
         .filter(Boolean);
       setGuesses(savedGuesses);
       setIsWon(savedState.isWon);
+      
+      // Restaurer les indices débloqués
+      setUnlockedHints({
+        5: savedGuesses.length >= 5,
+        10: savedGuesses.length >= 10,
+        15: savedGuesses.length >= 15
+      });
     }
     setIsLoaded(true);
   }, []);
@@ -42,6 +51,17 @@ function ClassicMode() {
       });
     }
   }, [guesses, isWon, isLoaded, targetPathology]);
+
+  // Vérifier les indices à débloquer
+  useEffect(() => {
+    if (!isWon) {
+      setUnlockedHints({
+        5: guesses.length >= 5,
+        10: guesses.length >= 10,
+        15: guesses.length >= 15
+      });
+    }
+  }, [guesses.length, isWon]);
 
   const handleSelectPathology = (selectedPathology) => {
     if (!targetPathology || isWon) return;
@@ -97,6 +117,58 @@ function ClassicMode() {
             <p className="win-stats">Trouvé en {guesses.length} essai{guesses.length > 1 ? 's' : ''}</p>
           </motion.div>
         )}
+
+        {/* Zone des indices */}
+        <div className="hints-container">
+          {/* Indice 1 : Citation (5 essais) */}
+          {unlockedHints[5] && !isWon && (
+            <motion.div 
+              className="hint-box"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <div className="hint-header">
+                <Lightbulb size={20} className="hint-icon" />
+                <span>Indice 1 (5 essais) : Citation</span>
+              </div>
+              <p className="hint-content">"{targetPathology.quote}"</p>
+            </motion.div>
+          )}
+
+          {/* Indice 2 : Symptômes (10 essais) */}
+          {unlockedHints[10] && !isWon && (
+            <motion.div 
+              className="hint-box"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <div className="hint-header">
+                <Stethoscope size={20} className="hint-icon" />
+                <span>Indice 2 (10 essais) : Symptômes</span>
+              </div>
+              <p className="hint-content">
+                {targetPathology.symptoms || "Indice non disponible pour cette pathologie"}
+              </p>
+            </motion.div>
+          )}
+
+          {/* Indice 3 : Traitement (15 essais) */}
+          {unlockedHints[15] && !isWon && (
+            <motion.div 
+              className="hint-box"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <div className="hint-header">
+                <Pill size={20} className="hint-icon" />
+                <span>Indice 3 (15 essais) : Traitement</span>
+              </div>
+              <p className="hint-content">
+                {targetPathology.treatment || "Indice non disponible pour cette pathologie"}
+              </p>
+            </motion.div>
+          )}
+        </div>
 
         <div className="guesses-container">
           <div className="table-wrapper">

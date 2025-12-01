@@ -10,7 +10,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai l'impression qu'un éléphant est assis sur ma poitrine.",
     image: "https://placehold.co/400x400?text=ECG+Tracé",
-    emojis: ["💔", "⚡", "🚑"]
+    emojis: ["💔", "⚡", "🚑"],
+    symptoms: "Douleur thoracique constrictive, irradiation bras gauche/mâchoire, sueurs",
+    treatment: "Angioplastie, Thrombolyse, Antiagrégants, Bêta-bloquants"
   },
   {
     id: 2,
@@ -22,7 +24,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "Je suis essoufflé dès que je monte les escaliers.",
     image: "https://placehold.co/400x400?text=Coeur",
-    emojis: ["❤️", "😮‍💨", "🦵"]
+    emojis: ["❤️", "😮‍💨", "🦵"],
+    symptoms: "Dyspnée d'effort, orthopnée, oedèmes des membres inférieurs, fatigue",
+    treatment: "Diurétiques, IEC, Bêta-bloquants, Régime sans sel"
   },
   {
     id: 3,
@@ -34,7 +38,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "Mon cœur bat de façon irrégulière, comme s'il sautait des battements.",
     image: "https://placehold.co/400x400?text=ECG+FA",
-    emojis: ["💓", "〰️", "⚡"]
+    emojis: ["💓", "〰️", "⚡"],
+    symptoms: "Palpitations, sensation de coeur irrégulier, fatigue, essoufflement",
+    treatment: "Anticoagulants, Antiarythmiques, Cardioversion"
   },
   {
     id: 4,
@@ -46,7 +52,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai une douleur dans la poitrine et je crache du sang.",
     image: "https://placehold.co/400x400?text=Poumon",
-    emojis: ["🫁", "🩸", "😰"]
+    emojis: ["🫁", "🩸", "😰"],
+    symptoms: "Douleur thoracique latéro-thoracique, dyspnée brutale, hémoptysie, tachycardie",
+    treatment: "Anticoagulants (Héparine, AVK, AOD), Oxygénothérapie, Thrombolyse (si grave)"
   },
   {
     id: 5,
@@ -58,7 +66,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "J'ai souvent mal à la tête le matin.",
     image: "https://placehold.co/400x400?text=Tensiometre",
-    emojis: ["🔴", "📈", "🩺"]
+    emojis: ["🔴", "📈", "🩺"],
+    symptoms: "Céphalées matinales, phosphènes, acouphènes, épistaxis",
+    treatment: "Antihypertenseurs, régime hyposodé, arrêt tabac, activité physique"
   },
   {
     id: 6,
@@ -70,7 +80,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "J'ai une douleur dans la poitrine quand je fais un effort.",
     image: "https://placehold.co/400x400?text=Coeur+Effort",
-    emojis: ["💔", "🏃", "😣"]
+    emojis: ["💔", "🏃", "😣"],
+    symptoms: "Douleur thoracique constrictive à l'effort, cède au repos",
+    treatment: "Trinitrine, Bêta-bloquants, inhibiteurs calciques, correction facteurs risque"
   },
   {
     id: 7,
@@ -82,7 +94,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "La douleur augmente quand je respire profondément.",
     image: "https://placehold.co/400x400?text=Pericarde",
-    emojis: ["❤️", "🔥", "😤"]
+    emojis: ["❤️", "🔥", "😤"],
+    symptoms: "Douleur thoracique augmentée à l'inspiration, fièvre, frottement péricardique",
+    treatment: "AINS (Aspirine/Ibuprofène), Colchicine, repos, protection gastrique"
   },
 
   // PNEUMOLOGIE
@@ -96,7 +110,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "Ça siffle quand je respire.",
     image: "https://placehold.co/400x400?text=Ventoline",
-    emojis: ["🌬️", "🫁", "🔴"]
+    emojis: ["🌬️", "🫁", "🔴"],
+    symptoms: "Dyspnée expiratoire sifflante, toux sèche, oppression thoracique",
+    treatment: "Bronchodilatateurs Bêta-2 mimétiques (Ventoline), Corticoïdes inhalés"
   },
   {
     id: 9,
@@ -108,7 +124,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai de la fièvre et je tousse avec des crachats jaunes.",
     image: "https://placehold.co/400x400?text=Radio+Poumon",
-    emojis: ["🫁", "🤒", "🦠"]
+    emojis: ["🫁", "🤒", "🦠"],
+    symptoms: "Fièvre élevée, frissons, toux productive purulente, douleur thoracique",
+    treatment: "Antibiotiques (Amoxicilline), Antipyrétiques, Oxygénothérapie si besoin"
   },
   {
     id: 10,
@@ -120,7 +138,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "Je tousse tous les matins depuis des années.",
     image: "https://placehold.co/400x400?text=Poumons+BPCO",
-    emojis: ["🚬", "🫁", "😮‍💨"]
+    emojis: ["🚬", "🫁", "😮‍💨"],
+    symptoms: "Toux chronique productive matinale, dyspnée d'effort progressive",
+    treatment: "Arrêt tabac, Bronchodilatateurs, Corticoïdes, Kinésithérapie respiratoire"
   },
   {
     id: 11,
@@ -132,7 +152,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai eu une douleur soudaine dans la poitrine et je n'arrive plus à respirer.",
     image: "https://placehold.co/400x400?text=Pneumothorax",
-    emojis: ["🫁", "💨", "😱"]
+    emojis: ["🫁", "💨", "😱"],
+    symptoms: "Douleur thoracique brutale 'en coup de poignard', dyspnée, toux sèche",
+    treatment: "Repos (si minime), Exsufflation à l'aiguille, Drainage thoracique"
   },
   {
     id: 12,
@@ -182,7 +204,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "Je ne peux rien avaler sans le rejeter immédiatement.",
     image: "https://placehold.co/400x400?text=Intestin",
-    emojis: ["🤢", "🚽", "🦠"]
+    emojis: ["🤢", "🚽", "🦠"],
+    symptoms: "Diarrhées, vomissements, douleurs abdominales, fièvre modérée",
+    treatment: "Réhydratation, Antiémétiques, Antidiarrhéiques, Régime sans résidus"
   },
   {
     id: 16,
@@ -194,7 +218,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai très mal en bas à droite du ventre.",
     image: "https://placehold.co/400x400?text=Appendice",
-    emojis: ["🔥", "➡️", "🤕"]
+    emojis: ["🔥", "➡️", "🤕"],
+    symptoms: "Douleur fosse iliaque droite, défense abdominale, fièvre, nausées",
+    treatment: "Chirurgie (Appendicectomie), Antibiotiques"
   },
   {
     id: 17,
@@ -206,7 +232,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "J'ai mal à l'estomac après les repas.",
     image: "https://placehold.co/400x400?text=Estomac",
-    emojis: ["🔥", "🍽️", "😖"]
+    emojis: ["🔥", "🍽️", "😖"],
+    symptoms: "Douleur épigastrique type crampe/brûlure, rythmée par les repas",
+    treatment: "IPP (Inhibiteurs de la Pompe à Protons), Eradication Helicobacter pylori"
   },
   {
     id: 18,
@@ -218,7 +246,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "Mon ventre a gonflé et j'ai la peau jaune.",
     image: "https://placehold.co/400x400?text=Foie",
-    emojis: ["🍺", "🟡", "🫃"]
+    emojis: ["🍺", "🟡", "🫃"],
+    symptoms: "Ascite, ictère, angiomes stellaires, circulation veineuse collatérale",
+    treatment: "Sevrage alcoolique, Diurétiques, Ponction d'ascite, Transplantation hépatique"
   },
   {
     id: 19,
@@ -230,7 +260,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai une douleur intense qui traverse le ventre jusqu'au dos.",
     image: "https://placehold.co/400x400?text=Pancreas",
-    emojis: ["🔥", "↔️", "😭"]
+    emojis: ["🔥", "↔️", "😭"],
+    symptoms: "Douleur épigastrique transfixiante, vomissements, arrêt du transit",
+    treatment: "Jeûne strict, Hydratation IV, Antalgiques majeurs, Ttt de la cause (calculs/alcool)"
   },
   {
     id: 20,
@@ -242,7 +274,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "J'ai des douleurs abdominales et des diarrhées chroniques.",
     image: "https://placehold.co/400x400?text=Intestin+Crohn",
-    emojis: ["🔄", "🚽", "😣"]
+    emojis: ["🔄", "🚽", "😣"],
+    symptoms: "Diarrhée chronique, douleurs abdominales, amaigrissement, lésions anales",
+    treatment: "Corticoïdes, Immunosuppresseurs, Biothérapies (Anti-TNF alpha)"
   },
   {
     id: 21,
@@ -254,7 +288,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai très mal sous les côtes à droite après un repas gras.",
     image: "https://placehold.co/400x400?text=Vesicule",
-    emojis: ["🪨", "🍔", "😫"]
+    emojis: ["🪨", "🍔", "😫"],
+    symptoms: "Douleur hypocondre droit, signe de Murphy positif, fièvre, nausées",
+    treatment: "Antibiotiques, Chirurgie (Cholécystectomie)"
   },
   {
     id: 22,
@@ -378,7 +414,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "J'ai souvent soif et je dois uriner fréquemment.",
     image: "https://placehold.co/400x400?text=Glycemie",
-    emojis: ["🍬", "💉", "💧"]
+    emojis: ["🍬", "💉", "💧"],
+    symptoms: "Polyuro-polydipsie, fatigue, infections récidivantes, prise de poids",
+    treatment: "Règles hygiéno-diététiques, Antidiabétiques oraux (Metformine), Insuline (parfois)"
   },
   {
     id: 32,
@@ -390,7 +428,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "J'ai perdu beaucoup de poids et je suis toujours fatigué.",
     image: "https://placehold.co/400x400?text=Insuline",
-    emojis: ["💉", "📉", "😴"]
+    emojis: ["💉", "📉", "😴"],
+    symptoms: "Syndrome cardinal (Polyuro-polydipsie, polyphagie, amaigrissement)",
+    treatment: "Insulinothérapie à vie"
   },
   {
     id: 33,
@@ -402,7 +442,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "Je perds du poids, j'ai chaud et mon cœur bat vite.",
     image: "https://placehold.co/400x400?text=Thyroide",
-    emojis: ["🦋", "📈", "💓"]
+    emojis: ["🦋", "📈", "💓"],
+    symptoms: "Tachycardie, amaigrissement, thermophobie, tremblements, diarrhée",
+    treatment: "Antithyroïdiens de synthèse, Bêta-bloquants, Iode radioactif, Chirurgie"
   },
   {
     id: 34,
@@ -414,7 +456,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "Je suis fatigué, j'ai pris du poids et j'ai froid.",
     image: "https://placehold.co/400x400?text=TSH",
-    emojis: ["🦋", "📉", "🥶"]
+    emojis: ["🦋", "📉", "🥶"],
+    symptoms: "Asthénie, prise de poids, frilosité, constipation, bradycardie",
+    treatment: "Hormones thyroïdiennes substitutives (Lévothyroxine)"
   },
   {
     id: 35,
@@ -426,7 +470,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai très soif, je vomis et mon haleine sent bizarre.",
     image: "https://placehold.co/400x400?text=Cetones",
-    emojis: ["🍬", "🤮", "⚠️"]
+    emojis: ["🍬", "🤮", "⚠️"],
+    symptoms: "Déshydratation, haleine acétonique (pomme), douleurs abdominales, troubles de la conscience",
+    treatment: "Réhydratation IV, Insuline IVSE, Correction troubles ioniques (K+)"
   },
 
   // NÉPHROLOGIE
@@ -440,7 +486,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "Je n'urine presque plus et mes jambes sont gonflées.",
     image: "https://placehold.co/400x400?text=Rein",
-    emojis: ["🫘", "💧", "🦵"]
+    emojis: ["🫘", "💧", "🦵"],
+    symptoms: "Oligo-anurie, oedèmes, confusion (si urémie élevée)",
+    treatment: "Traitement de la cause (déshydratation, obstacle, néphrotoxique), Dialyse si grave"
   },
   {
     id: 37,
@@ -452,7 +500,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "Je suis fatigué et j'ai des crampes la nuit.",
     image: "https://placehold.co/400x400?text=Dialyse",
-    emojis: ["🫘", "😴", "💪"]
+    emojis: ["🫘", "😴", "💪"],
+    symptoms: "Asthénie, pâleur (anémie), HTA, oedèmes",
+    treatment: "Régime (sel, protéines), Ttt HTA, EPO, Dialyse, Greffe rénale"
   },
   {
     id: 38,
@@ -464,7 +514,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai de la fièvre et très mal dans le dos d'un côté.",
     image: "https://placehold.co/400x400?text=Pyelonephrite",
-    emojis: ["🫘", "🔥", "🤒"]
+    emojis: ["🫘", "🔥", "🤒"],
+    symptoms: "Fièvre élevée, frissons, douleur lombaire unilatérale, signes urinaires",
+    treatment: "Antibiotiques (Fluoroquinolones ou C3G), Hydratation, Antalgiques"
   },
   {
     id: 39,
@@ -476,7 +528,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai une douleur insupportable dans le dos qui descend vers le bas.",
     image: "https://placehold.co/400x400?text=Calcul",
-    emojis: ["🪨", "😭", "⬇️"]
+    emojis: ["🪨", "😭", "⬇️"],
+    symptoms: "Douleur lombaire brutale, intense, irradiant vers les OGE, agitation",
+    treatment: "AINS (si pas de CI), Antalgiques, Antispasmodiques, Restriction hydrique (crise)"
   },
   {
     id: 40,
@@ -488,7 +542,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "Ça brûle quand j'urine et j'y vais très souvent.",
     image: "https://placehold.co/400x400?text=ECBU",
-    emojis: ["🔥", "🚽", "💧"]
+    emojis: ["🔥", "🚽", "💧"],
+    symptoms: "Brûlures mictionnelles, pollakiurie, impériosité, urines troubles",
+    treatment: "Antibiotique minute (Fosfomycine) ou court (Pivmécillinam), Hydratation"
   },
 
   // RHUMATOLOGIE / ORTHOPÉDIE
@@ -876,7 +932,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai mal au-dessus des yeux et le nez bouché.",
     image: "https://placehold.co/400x400?text=Sinusite",
-    emojis: ["👃", "🤒", "😣"]
+    emojis: ["👃", "🤒", "😣"],
+    symptoms: "Rhinorrhée purulente, céphalées frontales/maxillaires, douleur augmentée tête penchée en avant",
+    treatment: "Lavage de nez, Antalgiques, Vasoconstricteurs, Antibiotiques (si critères)"
   },
   {
     id: 72,
@@ -888,7 +946,9 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "Tout tourne autour de moi et j'entends moins bien.",
     image: "https://placehold.co/400x400?text=Meniere",
-    emojis: ["🌀", "👂", "🤢"]
+    emojis: ["🌀", "👂", "🤢"],
+    symptoms: "Triade : Vertiges rotatoires intenses, acouphènes, hypoacousie",
+    treatment: "Antivertigineux (Tanganil), Repos, Régime hyposodé, Chirurgie (si échec)"
   },
 
   // URGENCES / RÉANIMATION
@@ -902,7 +962,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "Je gonfle partout et j'ai du mal à respirer après avoir mangé.",
     image: "https://placehold.co/400x400?text=Anaphylaxie",
-    emojis: ["🥜", "😱", "💉"]
+    emojis: ["🥜", "😱", "💉"],
+    symptoms: "Urticaire, oedème de Quincke, hypotension, bronchospasme",
+    treatment: "Adrénaline IM (Anapen/Epipen), Corticoïdes, Antihistaminiques"
   },
   {
     id: 74,
@@ -914,7 +976,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "La personne s'est effondrée et ne répond plus.",
     image: "https://placehold.co/400x400?text=Defibrillateur",
-    emojis: ["💔", "⚡", "🚨"]
+    emojis: ["💔", "⚡", "🚨"],
+    symptoms: "Inconscience, absence de respiration, absence de pouls carotidien",
+    treatment: "Massage Cardiaque Externe (MCE), Défibrillation (DSA), Adrénaline"
   },
   {
     id: 75,
@@ -926,7 +990,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai pris trop de médicaments.",
     image: "https://placehold.co/400x400?text=Intoxication",
-    emojis: ["💊", "⚠️", "🚑"]
+    emojis: ["💊", "⚠️", "🚑"],
+    symptoms: "Troubles de la conscience, troubles du rythme cardiaque, vomissements",
+    treatment: "Lavage gastrique (si précoce), Charbon activé, Antidotes spécifiques"
   },
   {
     id: 76,
@@ -938,7 +1004,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "La personne a été trouvée dehors dans le froid, elle est confuse.",
     image: "https://placehold.co/400x400?text=Hypothermie",
-    emojis: ["🥶", "❄️", "🌡️"]
+    emojis: ["🥶", "❄️", "🌡️"],
+    symptoms: "Température < 35°C, frissons, confusion, bradycardie, coma",
+    treatment: "Réchauffement progressif (externe/interne), Monitoring"
   },
   {
     id: 77,
@@ -950,7 +1018,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai très chaud, ma peau est sèche et je suis confus.",
     image: "https://placehold.co/400x400?text=Hyperthermie",
-    emojis: ["🥵", "☀️", "🌡️"]
+    emojis: ["🥵", "☀️", "🌡️"],
+    symptoms: "Température > 40°C, peau sèche et chaude, troubles neurologiques, déshydratation",
+    treatment: "Refroidissement rapide (bain froid, brumisation), Réhydratation"
   },
   {
     id: 78,
@@ -962,7 +1032,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "On l'a sorti de l'eau, il tousse et respire mal.",
     image: "https://placehold.co/400x400?text=Noyade",
-    emojis: ["🌊", "🫁", "🚑"]
+    emojis: ["🌊", "🫁", "🚑"],
+    symptoms: "Détresse respiratoire, toux, cyanose, arrêt cardio-respiratoire possible",
+    treatment: "Oxygénothérapie, Ventilation mécanique, Réchauffement"
   },
 
   // OPHTALMOLOGIE
@@ -976,7 +1048,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "J'ai très mal à l'œil et je vois des halos autour des lumières.",
     image: "https://placehold.co/400x400?text=Glaucome",
-    emojis: ["👁️", "🔴", "💡"]
+    emojis: ["👁️", "🔴", "💡"],
+    symptoms: "Oeil rouge et douloureux, baisse d'acuité visuelle, nausées, pupille en semi-mydriase",
+    treatment: "Hypotonisants (Diamox, Collyres), Iridotomie au laser"
   },
   {
     id: 80,
@@ -988,7 +1062,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "Je vois des flashs et un voile noir qui descend sur ma vision.",
     image: "https://placehold.co/400x400?text=Retine",
-    emojis: ["👁️", "⚡", "⬛"]
+    emojis: ["👁️", "⚡", "⬛"],
+    symptoms: "Phosphènes (éclairs), myodésopsies (mouches), amputation du champ visuel (voile noir)",
+    treatment: "Chirurgie urgente (Vitrectomie, Cryothérapie, Laser)"
   },
 
   // ADDICTOLOGIE
@@ -1002,7 +1078,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "Je vois des choses qui n'existent pas et je tremble de partout.",
     image: "https://placehold.co/400x400?text=DT",
-    emojis: ["🍺", "😱", "〰️"]
+    emojis: ["🍺", "😱", "〰️"],
+    symptoms: "Tremblements, confusion, hallucinations (zoopsies), sueurs, tachycardie",
+    treatment: "Benzodiazépines, Hydratation, Vitamines B1/B6"
   },
   {
     id: 82,
@@ -1014,7 +1092,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "La personne ne répond plus et respire très lentement.",
     image: "https://placehold.co/400x400?text=Overdose",
-    emojis: ["💉", "😵", "🚑"]
+    emojis: ["💉", "😵", "🚑"],
+    symptoms: "Coma calme, myosis serré (en tête d'épingle), bradypnée",
+    treatment: "Naloxone (antidote), Ventilation assistée"
   },
 
   // GÉRIATRIE
@@ -1028,7 +1108,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "Depuis le décès de mon mari, je ne mange plus et je reste au lit.",
     image: "https://placehold.co/400x400?text=Geriatrie",
-    emojis: ["👴", "😢", "🛏️"]
+    emojis: ["👴", "😢", "🛏️"],
+    symptoms: "Anorexie, adypsie (refus de boire), repli sur soi, refus de soins",
+    treatment: "Nursing, Hydratation, Antidépresseurs, Soutien psychologique"
   },
   {
     id: 84,
@@ -1040,7 +1122,9 @@ export const pathologies = [
     chronic: "Aiguë",
     quote: "Mon père ne sait plus où il est depuis ce matin.",
     image: "https://placehold.co/400x400?text=Confusion",
-    emojis: ["🧠", "❓", "👴"]
+    emojis: ["🧠", "❓", "👴"],
+    symptoms: "Désorientation temporo-spatiale, troubles de l'attention, inversion du rythme nycthéméral",
+    treatment: "Traitement de la cause (Fécalome, rétention urinaire, iatrogénie...), Réassurance"
   },
   {
     id: 85,
@@ -1052,6 +1136,8 @@ export const pathologies = [
     chronic: "Chronique",
     quote: "J'ai une plaie au niveau du sacrum qui ne guérit pas.",
     image: "https://placehold.co/400x400?text=Escarre",
-    emojis: ["🛏️", "🔴", "⚠️"]
+    emojis: ["🛏️", "🔴", "⚠️"],
+    symptoms: "Rougeur persistante, phlyctène ou nécrose cutanée aux points d'appui (sacrum, talons)",
+    treatment: "Décharge (matelas à air, changement position), Soins locaux, Nutrition hyperprotéinée"
   }
 ];

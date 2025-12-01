@@ -13,6 +13,8 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
 }
 
 .header-label {
@@ -23,38 +25,63 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   cursor: help;
+  flex-shrink: 0;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+  z-index: 10000;
+}
+
+.info-icon-wrapper:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .info-icon {
   color: rgba(255, 255, 255, 0.6);
-  transition: color 0.2s;
+  transition: color 0.2s, transform 0.2s;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
 .info-icon-wrapper:hover .info-icon {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
+  transform: scale(1.1);
 }
 
 .tooltip {
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed;
   background: rgba(26, 31, 58, 0.98);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 0.75rem 1rem;
   font-size: 0.85rem;
   color: white;
-  white-space: nowrap;
-  z-index: 1000;
+  z-index: 999999;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   pointer-events: none;
   min-width: 200px;
   max-width: 300px;
   white-space: normal;
   text-align: left;
+  line-height: 1.5;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(26, 31, 58, 0.98);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .tooltip::after {
@@ -63,8 +90,9 @@
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  border: 6px solid transparent;
+  border: 5px solid transparent;
   border-top-color: rgba(255, 255, 255, 0.2);
+  margin-top: -1px;
 }
 
 @media (max-width: 768px) {
@@ -79,18 +107,20 @@
     font-size: 0.7rem;
   }
   
-  .tooltip {
-    min-width: 150px;
-    max-width: 200px;
-    font-size: 0.75rem;
-    padding: 0.6rem 0.8rem;
-    left: 0;
-    transform: translateX(0);
+  .info-icon {
+    width: 14px;
+    height: 14px;
   }
   
-  .tooltip::after {
-    left: 20px;
-    transform: none;
+  .info-icon-wrapper {
+    padding: 0.2rem;
+  }
+  
+  .tooltip {
+    min-width: 180px;
+    max-width: 250px;
+    font-size: 0.75rem;
+    padding: 0.6rem 0.8rem;
   }
 }
 
@@ -108,6 +138,17 @@
   .info-icon {
     width: 12px;
     height: 12px;
+  }
+  
+  .info-icon-wrapper {
+    padding: 0.15rem;
+  }
+  
+  .tooltip {
+    min-width: 160px;
+    max-width: 220px;
+    font-size: 0.7rem;
+    padding: 0.5rem 0.7rem;
   }
 }
 

@@ -17,7 +17,7 @@ function QuoteMode() {
   // Charger la pathologie du jour et l'état sauvegardé
   useEffect(() => {
     cleanOldData();
-    const pathology = getPathologyOfTheDay();
+    const pathology = getPathologyOfTheDay('quote');
     setTargetPathology(pathology);
 
     // Récupérer l'état sauvegardé

@@ -89,3 +89,38 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+@media (max-width: 768px) {
+  .search-bar-container {
+    margin-bottom: 1.5rem;
+  }
+  
+  .search-bar {
+    padding: 0.65rem 0.85rem;
+    border-radius: 12px;
+  }
+  
+  .search-input {
+    font-size: 0.95rem;
+  }
+  
+  .search-input::placeholder {
+    font-size: 0.85rem;
+  }
+  
+  .search-results {
+    border-radius: 10px;
+    max-height: 250px;
+  }
+  
+  .search-result-item {
+    padding: 0.65rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-input::placeholder {
+    font-size: 0.8rem;
+  }
+}
+

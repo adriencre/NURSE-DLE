@@ -17,7 +17,7 @@ function ImageMode() {
   // Charger la pathologie du jour et l'état sauvegardé
   useEffect(() => {
     cleanOldData();
-    const pathology = getPathologyOfTheDay();
+    const pathology = getPathologyOfTheDay('image');
     setTargetPathology(pathology);
 
     // Récupérer l'état sauvegardé

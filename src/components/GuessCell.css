@@ -40,3 +40,19 @@
   border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
+@media (max-width: 768px) {
+  .guess-cell {
+    min-height: 50px;
+    padding: 0.5rem;
+    font-size: 0.85rem;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .guess-cell {
+    min-height: 45px;
+    font-size: 0.8rem;
+  }
+}
+

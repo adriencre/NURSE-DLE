@@ -6,10 +6,24 @@
   width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .guess-row {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .guess-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 400px) {
   .guess-row {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
 }
 

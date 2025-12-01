@@ -41,6 +41,30 @@ function Menu({ onSelectMode }) {
 
   return (
     <div className="menu-container">
+      <motion.div
+        className="game-description"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="game-title">Nurse-dle</h2>
+        <p className="game-subtitle">
+          Le jeu de devinette pour étudiants infirmiers
+        </p>
+        <div className="game-description-content">
+          <p>
+            Testez vos connaissances médicales en devinant les <strong>pathologies du jour</strong> ! 
+            Chaque mode de jeu propose sa propre pathologie quotidienne. Relevez les 4 défis chaque jour 
+            pour améliorer vos compétences cliniques.
+          </p>
+          <div className="game-features">
+            <span className="feature-item">🎯 4 pathologie par jour (1 par mode)</span>
+            <span className="feature-item">📚 85 pathologies disponibles</span>
+            <span className="feature-item">💾 Progression sauvegardée</span>
+            <span className="feature-item">🔄 Nouveau défi quotidien</span>
+          </div>
+        </div>
+      </motion.div>
       <div className="menu-grid">
         {modes.map((mode, index) => {
           const Icon = mode.icon;

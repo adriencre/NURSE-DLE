@@ -1,13 +1,27 @@
 import { pathologies } from '../data/pathologies.js';
 
 /**
+ * Récupère la date effective (avec l'offset admin si présent)
+ */
+function getEffectiveDate() {
+  const offset = parseInt(localStorage.getItem('nursdle_date_offset') || '0');
+  const today = new Date();
+  // Utiliser setTime pour ajouter des jours en millisecondes (plus fiable)
+  const effectiveDate = new Date(today.getTime() + offset * 24 * 60 * 60 * 1000);
+  return effectiveDate;
+}
+
+/**
  * Sélectionne une pathologie de manière déterministe basée sur la date du jour et le mode
  * @param {string} mode - Le mode de jeu ('classic', 'quote', 'image', 'emoji')
  * @returns {Object} La pathologie du jour pour ce mode
  */
 export function getPathologyOfTheDay(mode = 'classic') {
-  const today = new Date();
-  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+  const effectiveDate = getEffectiveDate();
+  const dayOfYear = Math.floor((effectiveDate - new Date(effectiveDate.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+  
+  // Récupère l'offset admin (nombre de jours forcés)
+  const adminOffset = parseInt(localStorage.getItem('nursdle_date_offset') || '0');
   
   // Utilise un offset différent pour chaque mode pour avoir des pathologie différentes
   const modeOffsets = {
@@ -17,8 +31,11 @@ export function getPathologyOfTheDay(mode = 'classic') {
     'emoji': 3000
   };
   
-  const offset = modeOffsets[mode] || 0;
-  const seed = dayOfYear + offset;
+  const modeOffset = modeOffsets[mode] || 0;
+  
+  // Combine dayOfYear, modeOffset et adminOffset pour garantir un changement
+  // On multiplie adminOffset par un grand nombre pour éviter les collisions
+  const seed = dayOfYear + modeOffset + (adminOffset * 10000);
   
   // Utilise le seed pour sélectionner une pathologie
   const index = seed % pathologies.length;

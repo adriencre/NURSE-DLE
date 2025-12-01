@@ -1,7 +1,16 @@
-// Génère une clé basée sur la date du jour
-function getTodayKey(mode) {
+// Récupère la date effective (avec l'offset admin si présent)
+function getEffectiveDate() {
+  const offset = parseInt(localStorage.getItem('nursdle_date_offset') || '0');
   const today = new Date();
-  const dateStr = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
+  // Utiliser setTime pour ajouter des jours en millisecondes (plus fiable)
+  const effectiveDate = new Date(today.getTime() + offset * 24 * 60 * 60 * 1000);
+  return effectiveDate;
+}
+
+// Génère une clé basée sur la date du jour (utilise la date effective pour l'admin)
+function getTodayKey(mode) {
+  const effectiveDate = getEffectiveDate();
+  const dateStr = `${effectiveDate.getFullYear()}-${effectiveDate.getMonth() + 1}-${effectiveDate.getDate()}`;
   return `nursdle_${mode}_${dateStr}`;
 }
 
@@ -56,5 +65,36 @@ export function cleanOldData() {
       }
     }
   });
+}
+
+// Réinitialise toutes les données de jeu (pour l'admin)
+// Ne supprime PAS nursdle_date_offset car c'est nécessaire pour forcer un nouveau jour
+export function resetAllGameData() {
+  const keys = Object.keys(localStorage);
+  keys.forEach(key => {
+    if (key.startsWith('nursdle_') && key !== 'nursdle_date_offset') {
+      localStorage.removeItem(key);
+    }
+  });
+}
+
+// Force un nouveau jour en décalant la date de référence
+export function forceNewDay() {
+  // On stocke un offset de date dans localStorage
+  // Cela permet de "tricher" sur la date du jour pour le calcul de la pathologie
+  const currentOffset = parseInt(localStorage.getItem('nursdle_date_offset') || '0');
+  const newOffset = currentOffset + 1;
+  localStorage.setItem('nursdle_date_offset', newOffset.toString());
+  
+  // On supprime aussi toutes les données de jeu actuelles pour forcer un nouveau jour
+  // (mais on garde nursdle_date_offset)
+  resetAllGameData();
+  
+  console.log(`Nouveau jour forcé ! Offset passé de ${currentOffset} à ${newOffset}`);
+}
+
+// Récupère l'offset de date actuel
+export function getDateOffset() {
+  return parseInt(localStorage.getItem('nursdle_date_offset') || '0');
 }
 

@@ -2,6 +2,14 @@ import { useState, useRef, useEffect } from 'react';
 import { Search, X } from 'lucide-react';
 import './SearchBar.css';
 
+// Fonction pour normaliser une chaîne en enlevant les accents
+function normalizeString(str) {
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+}
+
 function SearchBar({ onSelect, options, placeholder = "Rechercher une pathologie...", excludedIds = [] }) {
   const [query, setQuery] = useState('');
   const [filteredOptions, setFilteredOptions] = useState([]);
@@ -17,11 +25,13 @@ function SearchBar({ onSelect, options, placeholder = "Rechercher une pathologie
       return;
     }
 
+    const normalizedQuery = normalizeString(query);
     const filtered = options
       .filter(option => !excludedIds.includes(option.id))
-      .filter(option =>
-        option.name.toLowerCase().includes(query.toLowerCase())
-      );
+      .filter(option => {
+        const normalizedName = normalizeString(option.name);
+        return normalizedName.includes(normalizedQuery);
+      });
     setFilteredOptions(filtered);
     setIsOpen(filtered.length > 0);
     setSelectedIndex(-1);

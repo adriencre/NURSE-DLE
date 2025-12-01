@@ -99,19 +99,23 @@ function ClassicMode() {
         )}
 
         <div className="guesses-container">
-          <TableHeaders />
-          {guesses.length === 0 && (
-            <div className="empty-state">
-              <p>Sélectionnez une pathologie pour commencer</p>
+          <div className="table-wrapper">
+            <div className="table-inner">
+              <TableHeaders />
+              {guesses.length === 0 && (
+                <div className="empty-state">
+                  <p>Sélectionnez une pathologie pour commencer</p>
+                </div>
+              )}
+              {guesses.map((guess, index) => (
+                <GuessRow
+                  key={index}
+                  guess={guess}
+                  answer={targetPathology}
+                />
+              ))}
             </div>
-          )}
-          {guesses.map((guess, index) => (
-            <GuessRow
-              key={index}
-              guess={guess}
-              answer={targetPathology}
-            />
-          ))}
+          </div>
         </div>
 
         <div className="legend-section">

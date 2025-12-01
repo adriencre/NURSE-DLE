@@ -4,6 +4,7 @@ import './GuessRow.css';
 
 function GuessRow({ guess, answer }) {
   const columns = [
+    { key: 'name' },
     { key: 'system' },
     { key: 'type' },
     { key: 'urgency' },

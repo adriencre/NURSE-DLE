@@ -4,6 +4,11 @@ import './TableHeaders.css';
 function TableHeaders() {
   const columns = [
     { 
+      key: 'name', 
+      label: 'Pathologie',
+      description: 'Le nom de la pathologie devinée'
+    },
+    { 
       key: 'system', 
       label: 'Système',
       description: 'Le système corporel affecté par la pathologie (ex: Cardio, Digestif, Respiratoire)'

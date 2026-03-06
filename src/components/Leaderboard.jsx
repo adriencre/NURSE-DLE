@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
+
+import { motion } from 'framer-motion';
 import { Trophy, Medal, Calendar, Globe, Crown, Flame, Target, RefreshCw } from 'lucide-react';
 import { getDailyLeaderboard, getGlobalLeaderboard } from '../utils/supabaseService';
 import { useAuth } from '../contexts/useAuth';
@@ -181,8 +183,3 @@ function Leaderboard() {
 }
 
 export default Leaderboard;
-
-
-
-
-

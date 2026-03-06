@@ -1,5 +1,6 @@
 import { Stethoscope, Quote, Image as ImageIcon, Smile, Trophy, User } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import AdSense from './AdSense';
 import './Menu.css';
 
 function Menu({ onSelectMode, onOpenLeaderboard, onOpenProfile, onOpenAuth }) {
@@ -100,6 +101,9 @@ function Menu({ onSelectMode, onOpenLeaderboard, onOpenProfile, onOpenAuth }) {
           );
         })}
       </div>
+
+      {/* Publicité en bas du menu */}
+      <AdSense format="horizontal" slot="1234567890" />
     </div>
   );
 }

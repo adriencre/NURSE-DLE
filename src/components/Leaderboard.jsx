@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Trophy, Medal, Calendar, Globe, Crown, Flame, Target, RefreshCw } from 'lucide-react';
 import { getDailyLeaderboard, getGlobalLeaderboard } from '../utils/supabaseService';
 import { useAuth } from '../contexts/AuthContext';
+import AdSense from './AdSense';
 import './Leaderboard.css';
 
 function Leaderboard({ onBack }) {
@@ -170,6 +171,9 @@ function Leaderboard({ onBack }) {
             )
           )}
         </div>
+
+        {/* Publicité */}
+        <AdSense format="horizontal" slot="1234567890" />
       </div>
     </div>
   );

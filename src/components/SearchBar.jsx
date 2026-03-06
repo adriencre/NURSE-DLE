@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { Search, X } from 'lucide-react';
 import './SearchBar.css';
 
@@ -18,14 +18,15 @@ function SearchBar({ onSelect, options, placeholder = "Rechercher une pathologie
   const inputRef = useRef(null);
   const listRef = useRef(null);
 
-  useEffect(() => {
-    if (query.trim() === '') {
+  // Utiliser useCallback pour éviter les setState dans le corps de l'effet
+  const updateFilteredOptions = useCallback((q) => {
+    if (q.trim() === '') {
       setFilteredOptions([]);
       setIsOpen(false);
       return;
     }
 
-    const normalizedQuery = normalizeString(query);
+    const normalizedQuery = normalizeString(q);
     const filtered = options
       .filter(option => !excludedIds.includes(option.id))
       .filter(option => {
@@ -35,7 +36,11 @@ function SearchBar({ onSelect, options, placeholder = "Rechercher une pathologie
     setFilteredOptions(filtered);
     setIsOpen(filtered.length > 0);
     setSelectedIndex(-1);
-  }, [query, options, excludedIds]);
+  }, [options, excludedIds]);
+
+  useEffect(() => {
+    updateFilteredOptions(query);
+  }, [query, updateFilteredOptions]);
 
   const handleSelect = (option) => {
     setQuery('');

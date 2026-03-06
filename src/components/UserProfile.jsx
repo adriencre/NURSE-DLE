@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { User, LogOut, Flame, Target, Trophy, BarChart3, History } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { getPlayerHistory } from '../utils/supabaseService';
+import AdSense from './AdSense';
 import './UserProfile.css';
 
 function UserProfile({ onBack }) {
@@ -9,17 +10,19 @@ function UserProfile({ onBack }) {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Déclarer loadHistory avec useCallback avant de l'utiliser dans useEffect
+  const loadHistory = useCallback(async () => {
+    if (!user) return;
+    const data = await getPlayerHistory(user.id, 20);
+    setHistory(data);
+    setLoading(false);
+  }, [user]);
+
   useEffect(() => {
     if (user) {
       loadHistory();
     }
-  }, [user]);
-
-  const loadHistory = async () => {
-    const data = await getPlayerHistory(user.id, 20);
-    setHistory(data);
-    setLoading(false);
-  };
+  }, [user, loadHistory]);
 
   const handleSignOut = async () => {
     await signOut();
@@ -111,6 +114,9 @@ function UserProfile({ onBack }) {
             </div>
           )}
         </div>
+
+        {/* Publicité */}
+        <AdSense format="horizontal" slot="1234567890" />
       </div>
     </div>
   );

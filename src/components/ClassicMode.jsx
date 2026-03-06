@@ -4,6 +4,7 @@ import { Lightbulb, Stethoscope, Pill } from 'lucide-react';
 import SearchBar from './SearchBar';
 import GuessRow from './GuessRow';
 import TableHeaders from './TableHeaders';
+import AdSense from './AdSense';
 import { pathologies } from '../data/pathologies';
 import { getPathologyOfTheDay } from '../utils/gameLogic';
 import { saveGameState, getGameState, cleanOldData } from '../utils/storage';
@@ -215,6 +216,9 @@ function ClassicMode() {
             </div>
           </div>
         </div>
+
+        {/* Publicité */}
+        <AdSense format="horizontal" slot="1234567890" />
 
         {guesses.length > 0 && !isWon && (
           <div className="game-info">

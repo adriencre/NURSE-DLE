@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Smile } from 'lucide-react';
 import SearchBar from './SearchBar';
+import AdSense from './AdSense';
 import { pathologies } from '../data/pathologies';
 import { getPathologyOfTheDay } from '../utils/gameLogic';
 import { saveGameState, getGameState, cleanOldData } from '../utils/storage';
@@ -138,6 +139,9 @@ function EmojiMode() {
             </ul>
           </div>
         )}
+
+        {/* Publicité */}
+        <AdSense format="horizontal" slot="1234567890" />
 
         {guesses.length === 0 && !isWon && (
           <div className="empty-state">

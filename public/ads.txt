@@ -1,0 +1,2 @@
+# ads.txt pour Google AdSense (remplace PUB_ID par ton vrai Publisher ID)
+google.com, pub-3185416709429781, DIRECT, f08c47fec0942fa0

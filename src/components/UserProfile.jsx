@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { User, LogOut, Flame, Target, Trophy, BarChart3, History } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/useAuth';
 import { getPlayerHistory } from '../utils/supabaseService';
 import AdSense from './AdSense';
 import './UserProfile.css';

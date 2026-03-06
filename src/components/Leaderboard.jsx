@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Trophy, Medal, Calendar, Globe, Crown, Flame, Target, RefreshCw } from 'lucide-react';
 import { getDailyLeaderboard, getGlobalLeaderboard } from '../utils/supabaseService';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/useAuth';
 import AdSense from './AdSense';
 import './Leaderboard.css';
 
-function Leaderboard({ onBack }) {
+function Leaderboard() {
   const [tab, setTab] = useState('daily'); // 'daily' | 'global'
   const [mode, setMode] = useState('classic');
   const [dailyData, setDailyData] = useState([]);
@@ -13,11 +13,8 @@ function Leaderboard({ onBack }) {
   const [loading, setLoading] = useState(true);
   const { profile } = useAuth();
 
-  useEffect(() => {
-    loadData();
-  }, [tab, mode]);
-
-  const loadData = async () => {
+  // Wrap loadData in useCallback to use it in dependencies
+  const loadData = useCallback(async () => {
     setLoading(true);
     try {
       if (tab === 'daily') {
@@ -31,7 +28,11 @@ function Leaderboard({ onBack }) {
       console.error('Erreur chargement classement:', err);
     }
     setLoading(false);
-  };
+  }, [tab, mode]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const getMedalIcon = (index) => {
     if (index === 0) return <Crown size={20} className="medal-gold" />;

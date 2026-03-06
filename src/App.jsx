@@ -10,7 +10,7 @@ import AdminPanel from './components/AdminPanel';
 import AuthModal from './components/AuthModal';
 import Leaderboard from './components/Leaderboard';
 import UserProfile from './components/UserProfile';
-import { useAuth } from './contexts/AuthContext';
+import { useAuth } from './contexts/useAuth';
 import './App.css';
 
 function App() {

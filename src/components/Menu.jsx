@@ -1,5 +1,5 @@
 import { Stethoscope, Quote, Image as ImageIcon, Smile, Trophy, User } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/useAuth';
 import AdSense from './AdSense';
 import './Menu.css';
 

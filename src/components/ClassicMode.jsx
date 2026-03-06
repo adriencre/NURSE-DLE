@@ -9,7 +9,7 @@ import { pathologies } from '../data/pathologies';
 import { getPathologyOfTheDay } from '../utils/gameLogic';
 import { saveGameState, getGameState, cleanOldData } from '../utils/storage';
 import { saveGameResult } from '../utils/supabaseService';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/useAuth';
 import './ClassicMode.css';
 
 function ClassicMode() {

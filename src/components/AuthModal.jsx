@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LogIn, UserPlus, Mail, Lock, User, Eye, EyeOff, AlertCircle } from 'lucide-react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/useAuth';
 import './AuthModal.css';
 
 function AuthModal({ onClose }) {
@@ -215,4 +215,5 @@ function AuthModal({ onClose }) {
 }
 
 export default AuthModal;
+
 

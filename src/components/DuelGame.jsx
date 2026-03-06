@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Crown, Users, Copy, Check, Play, LogOut, Trophy, Clock, Swords } from 'lucide-react';
 import SearchBar from './SearchBar';
+import TableHeaders from './TableHeaders';
+import GuessRow from './GuessRow';
 import { pathologies } from '../data/pathologies';
 import {
   getRoom,
@@ -14,11 +16,11 @@ import {
 } from '../utils/duelService';
 import './DuelMode.css';
 
-function DuelGame({ roomId, user, profile, isHost, onLeave }) {
+function DuelGame({ roomId, user, isHost, onLeave }) {
   const [room, setRoom] = useState(null);
   const [players, setPlayers] = useState([]);
   const [currentPathology, setCurrentPathology] = useState(null);
-  const [guessedIds, setGuessedIds] = useState([]);
+  const [roundGuesses, setRoundGuesses] = useState([]);
   const [countdown, setCountdown] = useState(null);
   const [roundResult, setRoundResult] = useState(null); // { winnerId, winnerName, pathologyName }
   const [gameWinner, setGameWinner] = useState(null);
@@ -47,7 +49,7 @@ function DuelGame({ roomId, user, profile, isHost, onLeave }) {
       const patho = pathologies.find(p => p.id === newRoom.current_pathology_id);
       setCurrentPathology(patho || null);
       setRoundResult(null);
-      setGuessedIds([]);
+      setRoundGuesses([]);
       setCountdown(null);
     }
 
@@ -100,8 +102,7 @@ function DuelGame({ roomId, user, profile, isHost, onLeave }) {
 
   // Souscrire aux changements en temps réel
   useEffect(() => {
-    const channel = subscribeToRoom(roomId, handleRoomChange, handlePlayersChange);
-    channelRef.current = channel;
+    channelRef.current = subscribeToRoom(roomId, handleRoomChange, handlePlayersChange);
 
     return () => {
       unsubscribeFromRoom(channelRef.current);
@@ -134,7 +135,7 @@ function DuelGame({ roomId, user, profile, isHost, onLeave }) {
   const handleGuess = useCallback(async (selectedPathology) => {
     if (!room || !room.round_active || !currentPathology) return;
 
-    setGuessedIds(prev => [...prev, selectedPathology.id]);
+    setRoundGuesses(prev => [...prev, selectedPathology]);
 
     if (selectedPathology.id === currentPathology.id) {
       await playerFoundAnswer(roomId, user.id, currentPathology.id);
@@ -315,34 +316,37 @@ function DuelGame({ roomId, user, profile, isHost, onLeave }) {
           </div>
         )}
 
-        {/* Zone de jeu */}
+        {/* Zone de jeu style classique */}
         {currentPathology && room.round_active && (
           <div className="duel-game-area">
-            {/* Citation de la pathologie comme indice */}
-            <div className="duel-clue">
-              <p className="duel-clue-label">🩺 Trouvez la pathologie !</p>
-              <div className="duel-clue-hints">
-                <span className="duel-hint">Système : <strong>{currentPathology.system}</strong></span>
-                <span className="duel-hint">Type : <strong>{currentPathology.type}</strong></span>
-                <span className="duel-hint">Urgence : <strong>{currentPathology.urgency}</strong></span>
-              </div>
-              <blockquote className="duel-clue-quote">
-                "{currentPathology.quote}"
-              </blockquote>
-            </div>
-
-            {/* Barre de recherche */}
             <SearchBar
               onSelect={handleGuess}
               options={pathologies}
-              placeholder="Devinez la pathologie..."
-              excludedIds={guessedIds}
+              placeholder="Rechercher une pathologie..."
+              excludedIds={roundGuesses.map(g => g.id)}
             />
 
-            {/* Liste des essais */}
-            {guessedIds.length > 0 && (
+            <div className="duel-classic-table">
+              <TableHeaders />
+              {roundGuesses.length === 0 && (
+                <div className="duel-classic-empty">
+                  Sélectionnez une pathologie pour commencer
+                </div>
+              )}
+              <div className="duel-classic-rows">
+                {roundGuesses.map((guess, index) => (
+                  <GuessRow
+                    key={`${guess.id}-${index}`}
+                    guess={guess}
+                    answer={currentPathology}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {roundGuesses.length > 0 && (
               <div className="duel-guesses">
-                <p>{guessedIds.length} essai{guessedIds.length > 1 ? 's' : ''}</p>
+                <p>{roundGuesses.length} essai{roundGuesses.length > 1 ? 's' : ''}</p>
               </div>
             )}
           </div>

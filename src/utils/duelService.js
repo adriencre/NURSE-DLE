@@ -49,11 +49,13 @@ export async function createRoom(userId, username, maxPlayers = 2, winsNeeded = 
  * Rejoindre un salon existant
  */
 export async function joinRoom(roomId, userId, username) {
+  const normalizedRoomId = roomId.trim().toLowerCase();
+
   // Vérifier que la room existe et est en attente
   const { data: room, error: roomError } = await supabase
     .from('duel_rooms')
     .select('*, duel_players(count)')
-    .eq('id', roomId.toUpperCase())
+    .eq('id', normalizedRoomId)
     .single();
 
   if (roomError || !room) {
@@ -285,4 +287,3 @@ export function unsubscribeFromRoom(channel) {
     supabase.removeChannel(channel);
   }
 }
-

@@ -144,7 +144,7 @@ function DuelGame({ roomId, user, profile, isHost, onLeave }) {
   // Copier le code
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(roomId);
+      await navigator.clipboard.writeText(roomId.toUpperCase());
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -183,7 +183,7 @@ function DuelGame({ roomId, user, profile, isHost, onLeave }) {
           <div className="duel-code-display">
             <span className="duel-code-label">Code du salon</span>
             <div className="duel-code-box">
-              <span className="duel-code-text">{roomId}</span>
+              <span className="duel-code-text">{roomId.toUpperCase()}</span>
               <button className="duel-code-copy" onClick={handleCopy}>
                 {copied ? <Check size={18} /> : <Copy size={18} />}
               </button>

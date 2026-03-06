@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Lightbulb, Stethoscope, Pill } from 'lucide-react';
 import SearchBar from './SearchBar';
@@ -7,6 +7,8 @@ import TableHeaders from './TableHeaders';
 import { pathologies } from '../data/pathologies';
 import { getPathologyOfTheDay } from '../utils/gameLogic';
 import { saveGameState, getGameState, cleanOldData } from '../utils/storage';
+import { saveGameResult } from '../utils/supabaseService';
+import { useAuth } from '../contexts/AuthContext';
 import './ClassicMode.css';
 
 function ClassicMode() {
@@ -15,6 +17,13 @@ function ClassicMode() {
   const [isWon, setIsWon] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [unlockedHints, setUnlockedHints] = useState({ 5: false, 10: false, 15: false });
+  const { user } = useAuth();
+  const startTime = useRef(null);
+
+  // Initialiser le timer au montage
+  useEffect(() => {
+    startTime.current = Date.now();
+  }, []);
 
   // Charger la pathologie du jour et l'état sauvegardé
   useEffect(() => {
@@ -67,11 +76,25 @@ function ClassicMode() {
     if (!targetPathology || isWon) return;
 
     const won = selectedPathology.id === targetPathology.id;
+    const newGuesses = [...guesses, selectedPathology];
+
     if (won) {
       setIsWon(true);
+      // Sauvegarder le résultat dans Supabase si connecté
+      if (user) {
+        const timeTaken = Math.round((Date.now() - startTime.current) / 1000);
+        saveGameResult({
+          userId: user.id,
+          mode: 'classic',
+          pathologyId: targetPathology.id,
+          attempts: newGuesses.length,
+          won: true,
+          timeTaken,
+        });
+      }
     }
 
-    setGuesses(prev => [...prev, selectedPathology]);
+    setGuesses(newGuesses);
   };
 
   if (!targetPathology || !isLoaded) {
@@ -80,12 +103,7 @@ function ClassicMode() {
 
   return (
     <div className="classic-mode">
-      <motion.div
-        className="classic-mode-container"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      >
+      <div className="classic-mode-container">
         <div className="mode-header">
           <h2>Mode Classique</h2>
           <p className="mode-description">
@@ -122,26 +140,18 @@ function ClassicMode() {
         <div className="hints-container">
           {/* Indice 1 : Citation (5 essais) */}
           {unlockedHints[5] && !isWon && (
-            <motion.div 
-              className="hint-box"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
+            <div className="hint-box">
               <div className="hint-header">
                 <Lightbulb size={20} className="hint-icon" />
                 <span>Indice 1 (5 essais) : Citation</span>
               </div>
               <p className="hint-content">"{targetPathology.quote}"</p>
-            </motion.div>
+            </div>
           )}
 
           {/* Indice 2 : Symptômes (10 essais) */}
           {unlockedHints[10] && !isWon && (
-            <motion.div 
-              className="hint-box"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
+            <div className="hint-box">
               <div className="hint-header">
                 <Stethoscope size={20} className="hint-icon" />
                 <span>Indice 2 (10 essais) : Symptômes</span>
@@ -149,16 +159,12 @@ function ClassicMode() {
               <p className="hint-content">
                 {targetPathology.symptoms || "Indice non disponible pour cette pathologie"}
               </p>
-            </motion.div>
+            </div>
           )}
 
           {/* Indice 3 : Traitement (15 essais) */}
           {unlockedHints[15] && !isWon && (
-            <motion.div 
-              className="hint-box"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
+            <div className="hint-box">
               <div className="hint-header">
                 <Pill size={20} className="hint-icon" />
                 <span>Indice 3 (15 essais) : Traitement</span>
@@ -166,7 +172,7 @@ function ClassicMode() {
               <p className="hint-content">
                 {targetPathology.treatment || "Indice non disponible pour cette pathologie"}
               </p>
-            </motion.div>
+            </div>
           )}
         </div>
 
@@ -215,7 +221,7 @@ function ClassicMode() {
             <p>Essais : {guesses.length}</p>
           </div>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 }

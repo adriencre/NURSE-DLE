@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Smile } from 'lucide-react';
 import SearchBar from './SearchBar';
 import { pathologies } from '../data/pathologies';
 import { getPathologyOfTheDay } from '../utils/gameLogic';
 import { saveGameState, getGameState, cleanOldData } from '../utils/storage';
+import { saveGameResult } from '../utils/supabaseService';
+import { useAuth } from '../contexts/AuthContext';
 import './EmojiMode.css';
 
 function EmojiMode() {
@@ -12,6 +14,12 @@ function EmojiMode() {
   const [guesses, setGuesses] = useState([]);
   const [isWon, setIsWon] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { user } = useAuth();
+  const startTime = useRef(null);
+
+  useEffect(() => {
+    startTime.current = Date.now();
+  }, []);
 
   // Charger la pathologie du jour et l'état sauvegardé
   useEffect(() => {
@@ -44,11 +52,25 @@ function EmojiMode() {
   const handleSelectPathology = (selectedPathology) => {
     if (!targetPathology || isWon) return;
 
-    if (selectedPathology.id === targetPathology.id) {
+    const newGuesses = [...guesses, selectedPathology];
+    const won = selectedPathology.id === targetPathology.id;
+
+    if (won) {
       setIsWon(true);
+      if (user) {
+        const timeTaken = Math.round((Date.now() - startTime.current) / 1000);
+        saveGameResult({
+          userId: user.id,
+          mode: 'emoji',
+          pathologyId: targetPathology.id,
+          attempts: newGuesses.length,
+          won: true,
+          timeTaken,
+        });
+      }
     }
 
-    setGuesses(prev => [...prev, selectedPathology]);
+    setGuesses(newGuesses);
   };
 
   if (!targetPathology || !isLoaded) {
@@ -57,12 +79,7 @@ function EmojiMode() {
 
   return (
     <div className="emoji-mode">
-      <motion.div
-        className="emoji-mode-container"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      >
+      <div className="emoji-mode-container">
         <div className="mode-header">
           <h2>Mode Emoji</h2>
           <p className="mode-description">
@@ -70,32 +87,17 @@ function EmojiMode() {
           </p>
         </div>
 
-        <motion.div
-          className="emoji-card"
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.4 }}
-        >
+        <div className="emoji-card">
           <Smile className="emoji-icon" size={32} />
           <div className="emoji-display">
             {targetPathology.emojis.map((emoji, index) => (
-              <motion.span
-                key={index}
-                className="emoji-item"
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{
-                  delay: 0.3 + index * 0.1,
-                  type: 'spring',
-                  stiffness: 200
-                }}
-              >
+              <span key={index} className="emoji-item">
                 {emoji}
-              </motion.span>
+              </span>
             ))}
           </div>
           <p className="emoji-label">Quelle pathologie correspond à ces émojis ?</p>
-        </motion.div>
+        </div>
 
         {!isWon ? (
           <div className="search-section">
@@ -142,7 +144,7 @@ function EmojiMode() {
             <p>Essayez de deviner la pathologie correspondant à ces émojis</p>
           </div>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 }

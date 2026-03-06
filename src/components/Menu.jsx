@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion';
-import { Stethoscope, Quote, Image as ImageIcon, Smile } from 'lucide-react';
+import { Stethoscope, Quote, Image as ImageIcon, Smile, Trophy, User } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 import './Menu.css';
 
-function Menu({ onSelectMode }) {
+function Menu({ onSelectMode, onOpenLeaderboard, onOpenProfile, onOpenAuth }) {
+  const { user } = useAuth();
   const modes = [
     {
       id: 'classic',
@@ -41,12 +42,7 @@ function Menu({ onSelectMode }) {
 
   return (
     <div className="menu-container">
-      <motion.div
-        className="game-description"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+      <div className="game-description">
         <h2 className="game-title">Nurse-dle</h2>
         <p className="game-subtitle">
           Le jeu de devinette pour étudiants infirmiers
@@ -59,25 +55,39 @@ function Menu({ onSelectMode }) {
           </p>
           <div className="game-features">
             <span className="feature-item">🎯 4 pathologie par jour (1 par mode)</span>
-            <span className="feature-item">📚 85 pathologies disponibles</span>
+            <span className="feature-item">📚 210 pathologies disponibles</span>
             <span className="feature-item">💾 Progression sauvegardée</span>
             <span className="feature-item">🔄 Nouveau défi quotidien</span>
           </div>
         </div>
-      </motion.div>
+      </div>
+
+      {/* Actions rapides */}
+      <div className="menu-actions">
+        <button
+          className="menu-action-btn menu-action-leaderboard"
+          onClick={onOpenLeaderboard}
+        >
+          <Trophy size={20} />
+          Classement
+        </button>
+        <button
+          className="menu-action-btn menu-action-profile"
+          onClick={user ? onOpenProfile : onOpenAuth}
+        >
+          <User size={20} />
+          {user ? 'Mon Profil' : 'Se connecter'}
+        </button>
+      </div>
+
       <div className="menu-grid">
-        {modes.map((mode, index) => {
+        {modes.map((mode) => {
           const Icon = mode.icon;
           return (
-            <motion.div
+            <div
               key={mode.id}
               className={`menu-card ${!mode.available ? 'menu-card-disabled' : ''}`}
               onClick={() => mode.available && onSelectMode(mode.id)}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.3 }}
-              whileHover={mode.available ? { scale: 1.05, y: -5 } : {}}
-              whileTap={mode.available ? { scale: 0.95 } : {}}
             >
               <div className="menu-card-icon" style={{ background: mode.available ? `linear-gradient(135deg, ${mode.color} 0%, ${mode.color}dd 100%)` : 'rgba(100, 100, 100, 0.3)' }}>
                 <Icon size={32} />
@@ -86,7 +96,7 @@ function Menu({ onSelectMode }) {
               <p className="menu-card-description">
                 {mode.comingSoon ? '🚧 En développement' : mode.description}
               </p>
-            </motion.div>
+            </div>
           );
         })}
       </div>

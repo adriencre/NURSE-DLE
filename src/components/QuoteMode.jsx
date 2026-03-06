@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { MessageSquare, Lightbulb } from 'lucide-react';
 import SearchBar from './SearchBar';
 import { pathologies } from '../data/pathologies';
 import { getPathologyOfTheDay } from '../utils/gameLogic';
 import { saveGameState, getGameState, cleanOldData } from '../utils/storage';
+import { saveGameResult } from '../utils/supabaseService';
+import { useAuth } from '../contexts/AuthContext';
 import './QuoteMode.css';
 
 function QuoteMode() {
@@ -13,6 +15,12 @@ function QuoteMode() {
   const [isWon, setIsWon] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const { user } = useAuth();
+  const startTime = useRef(null);
+
+  useEffect(() => {
+    startTime.current = Date.now();
+  }, []);
 
   // Charger la pathologie du jour et l'état sauvegardé
   useEffect(() => {
@@ -54,12 +62,26 @@ function QuoteMode() {
   const handleSelectPathology = (selectedPathology) => {
     if (!targetPathology || isWon) return;
 
-    if (selectedPathology.id === targetPathology.id) {
+    const newGuesses = [...guesses, selectedPathology];
+    const won = selectedPathology.id === targetPathology.id;
+
+    if (won) {
       setIsWon(true);
       setShowHint(false);
+      if (user) {
+        const timeTaken = Math.round((Date.now() - startTime.current) / 1000);
+        saveGameResult({
+          userId: user.id,
+          mode: 'quote',
+          pathologyId: targetPathology.id,
+          attempts: newGuesses.length,
+          won: true,
+          timeTaken,
+        });
+      }
     }
 
-    setGuesses(prev => [...prev, selectedPathology]);
+    setGuesses(newGuesses);
   };
 
   if (!targetPathology || !isLoaded) {
@@ -68,12 +90,7 @@ function QuoteMode() {
 
   return (
     <div className="quote-mode">
-      <motion.div
-        className="quote-mode-container"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      >
+      <div className="quote-mode-container">
         <div className="mode-header">
           <h2>Mode Citation</h2>
           <p className="mode-description">
@@ -81,18 +98,13 @@ function QuoteMode() {
           </p>
         </div>
 
-        <motion.div
-          className="quote-card"
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.4 }}
-        >
+        <div className="quote-card">
           <MessageSquare className="quote-icon" size={32} />
           <blockquote className="quote-text">
             "{targetPathology.quote}"
           </blockquote>
           <p className="quote-label">— Citation d'un patient</p>
-        </motion.div>
+        </div>
 
         {!isWon ? (
           <div className="search-section">
@@ -110,19 +122,14 @@ function QuoteMode() {
         )}
 
         {showHint && !isWon && (
-          <motion.div
-            className="hint-card"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-          >
+          <div className="hint-card">
             <Lightbulb className="hint-icon" size={24} />
             <div className="hint-content">
               <h3>Indice</h3>
               <p>Système : <strong>{targetPathology.system}</strong></p>
               <p>Type : <strong>{targetPathology.type}</strong></p>
             </div>
-          </motion.div>
+          </div>
         )}
 
         {isWon && (
@@ -155,7 +162,7 @@ function QuoteMode() {
             <p>Essayez de deviner la pathologie correspondant à cette citation</p>
           </div>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 }

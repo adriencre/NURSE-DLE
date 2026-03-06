@@ -133,6 +133,17 @@ export function AuthProvider({ children }) {
     return { data, error };
   }, []);
 
+  // Connexion Google OAuth
+  const signInWithGoogle = useCallback(async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin,
+      },
+    });
+    return { data, error };
+  }, []);
+
   // Déconnexion
   const signOut = useCallback(async () => {
     const { error } = await supabase.auth.signOut();
@@ -165,10 +176,11 @@ export function AuthProvider({ children }) {
     loading,
     signUp,
     signIn,
+    signInWithGoogle,
     signOut,
     updateProfile,
     fetchProfile,
-  }), [user, profile, loading, signUp, signIn, signOut, updateProfile, fetchProfile]);
+  }), [user, profile, loading, signUp, signIn, signInWithGoogle, signOut, updateProfile, fetchProfile]);
 
   return (
     <AuthContext.Provider value={value}>
@@ -176,9 +188,3 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-
-
-
-
-
-

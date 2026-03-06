@@ -4,6 +4,17 @@ import { LogIn, UserPlus, Mail, Lock, User, Eye, EyeOff, AlertCircle } from 'luc
 import { useAuth } from '../contexts/useAuth';
 import './AuthModal.css';
 
+function GoogleLogo() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="auth-google-icon">
+      <path fill="#EA4335" d="M12 10.2v3.9h5.4c-.2 1.3-1.5 3.9-5.4 3.9-3.2 0-5.9-2.7-5.9-6s2.7-6 5.9-6c1.8 0 3 .8 3.7 1.5l2.5-2.4C16.7 3.8 14.6 3 12 3 7 3 3 7 3 12s4 9 9 9c5.2 0 8.6-3.6 8.6-8.7 0-.6-.1-1.1-.2-1.6H12z" />
+      <path fill="#4285F4" d="M21 12.3c0-.6-.1-1.1-.2-1.6H12v3.9h5.4c-.3 1.3-1.3 2.5-2.7 3.1v2.6h3.5c2-1.8 2.8-4.5 2.8-8z" />
+      <path fill="#FBBC05" d="M6.1 14.7c-.2-.6-.4-1.2-.4-1.9s.1-1.3.4-1.9V8.3H2.7C2.2 9.4 2 10.6 2 11.8s.2 2.4.7 3.5l3.4-2.6z" />
+      <path fill="#34A853" d="M12 21c2.6 0 4.8-.9 6.4-2.4l-3.5-2.6c-.9.6-1.9.9-2.9.9-2.2 0-4.1-1.5-4.8-3.5l-3.4 2.6C5.3 18.9 8.4 21 12 21z" />
+    </svg>
+  );
+}
+
 function AuthModal({ onClose }) {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
@@ -14,7 +25,7 @@ function AuthModal({ onClose }) {
   const [success, setSuccess] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const { signIn, signUp } = useAuth();
+  const { signIn, signUp, signInWithGoogle } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,11 +71,29 @@ function AuthModal({ onClose }) {
     setIsLoading(false);
   };
 
+  const handleGoogleSignIn = async () => {
+    setError('');
+    setSuccess('');
+    setIsLoading(true);
+
+    try {
+      const { error } = await signInWithGoogle();
+      if (error) {
+        setError(getErrorMessage(error.message));
+      }
+    } catch {
+      setError('Une erreur inattendue est survenue');
+    }
+
+    setIsLoading(false);
+  };
+
   const getErrorMessage = (msg) => {
     if (msg.includes('Invalid login')) return 'Email ou mot de passe incorrect';
     if (msg.includes('already registered')) return 'Cet email est déjà utilisé';
     if (msg.includes('invalid email')) return 'Email invalide';
     if (msg.includes('weak password')) return 'Mot de passe trop faible (min. 6 caractères)';
+    if (msg.includes('provider is not enabled')) return 'Connexion Google non activée côté serveur';
     return msg;
   };
 
@@ -208,6 +237,18 @@ function AuthModal({ onClose }) {
               </>
             )}
           </button>
+
+          <div className="auth-divider">ou</div>
+
+          <button
+            type="button"
+            className="auth-google-button"
+            onClick={handleGoogleSignIn}
+            disabled={isLoading}
+          >
+            <GoogleLogo />
+            Continuer avec Google
+          </button>
         </form>
       </motion.div>
     </motion.div>
@@ -215,5 +256,4 @@ function AuthModal({ onClose }) {
 }
 
 export default AuthModal;
-
 

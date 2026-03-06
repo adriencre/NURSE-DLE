@@ -2,6 +2,23 @@
 
 Un jeu de devinette inspiré de Wordle, adapté pour les étudiants infirmiers. Devinez la pathologie du jour en utilisant différents modes de jeu !
 
+## 🔐 Authentification (Supabase + Google)
+
+1. Copier le fichier d'exemple et le remplir :
+   ```bash
+   cp .env.example .env.local
+   ```
+2. Configurer dans `.env.local` :
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+3. Dans Supabase > Authentication > URL Configuration, ajouter vos URLs autorisées :
+   - `http://localhost:5173`
+   - votre domaine Netlify
+4. Dans Supabase > Authentication > Providers > Google, activer Google avec votre Client ID/Secret Google Cloud.
+
+> Le callback OAuth Google utilise l'endpoint Supabase :
+> `https://<project-ref>.supabase.co/auth/v1/callback`
+
 ## 🎮 Modes de Jeu
 
 - **Mode Classique** : Devinez la pathologie en comparant les caractéristiques (Système, Type, Urgence, Population, Chronique)

@@ -6,6 +6,7 @@ import ClassicMode from './components/ClassicMode';
 import QuoteMode from './components/QuoteMode';
 import ComingSoon from './components/ComingSoon';
 import EmojiMode from './components/EmojiMode';
+import DuelMode from './components/DuelMode';
 import AdminPanel from './components/AdminPanel';
 import AuthModal from './components/AuthModal';
 import Leaderboard from './components/Leaderboard';
@@ -93,6 +94,8 @@ function App() {
         return <ComingSoon modeName="Mode Image" />;
       case 'emoji':
         return <EmojiMode />;
+      case 'duel':
+        return <DuelMode onNeedAuth={() => setShowAuth(true)} />;
       default:
         return (
           <Menu

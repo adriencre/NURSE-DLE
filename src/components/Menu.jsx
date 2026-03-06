@@ -1,4 +1,4 @@
-import { Stethoscope, Quote, Image as ImageIcon, Smile, Trophy, User } from 'lucide-react';
+import { Stethoscope, Quote, Image as ImageIcon, Smile, Swords, Trophy, User } from 'lucide-react';
 import { useAuth } from '../contexts/useAuth';
 import AdSense from './AdSense';
 import './Menu.css';
@@ -23,6 +23,22 @@ function Menu({ onSelectMode, onOpenLeaderboard, onOpenProfile, onOpenAuth }) {
       available: true
     },
     {
+      id: 'emoji',
+      name: 'Mode Emoji',
+      icon: Smile,
+      description: 'Devine à partir d\'émojis',
+      color: '#43e97b',
+      available: true
+    },
+    {
+      id: 'duel',
+      name: 'Mode Duel',
+      icon: Swords,
+      description: 'Affronte tes amis en temps réel ! Jusqu\'à 10 joueurs',
+      color: '#f59e0b',
+      available: true
+    },
+    {
       id: 'image',
       name: 'Mode Image',
       icon: ImageIcon,
@@ -31,14 +47,6 @@ function Menu({ onSelectMode, onOpenLeaderboard, onOpenProfile, onOpenAuth }) {
       available: false,
       comingSoon: true
     },
-    {
-      id: 'emoji',
-      name: 'Mode Emoji',
-      icon: Smile,
-      description: 'Devine à partir d\'émojis',
-      color: '#43e97b',
-      available: true
-    }
   ];
 
   return (

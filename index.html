@@ -1,14 +1,151 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nurse-dle - Jeu de devinette pour étudiants infirmiers</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Titre & Description -->
+    <title>Nurse-dle — Le jeu quotidien de devinette de pathologies pour étudiants infirmiers</title>
+    <meta name="description" content="Nurse-dle est un jeu de devinette quotidien inspiré de Wordle pour les étudiants infirmiers. Testez vos connaissances sur plus de 210 pathologies avec 4 modes de jeu : Classique, Citation, Emoji et Duel multijoueur." />
+    <meta name="keywords" content="nurse-dle, nursdle, jeu infirmier, devinette pathologie, wordle médical, étudiant infirmier, IFSI, quiz médical, pathologie du jour, jeu santé, révision infirmier, UE 2.7, soins infirmiers, quiz pathologie" />
+    <meta name="author" content="Nurse-dle" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://nurse-dle.netlify.app/" />
+
+    <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nurse-dle.netlify.app/" />
+    <meta property="og:title" content="Nurse-dle — Le jeu quotidien de devinette de pathologies" />
+    <meta property="og:description" content="Testez vos connaissances médicales en devinant les pathologies du jour ! 4 modes de jeu, 210+ pathologies, défis quotidiens pour étudiants infirmiers." />
+    <meta property="og:image" content="https://nurse-dle.netlify.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Nurse-dle — Jeu de devinette de pathologies pour étudiants infirmiers" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Nurse-dle" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nurse-dle — Le jeu quotidien de devinette de pathologies" />
+    <meta name="twitter:description" content="Testez vos connaissances médicales en devinant les pathologies du jour ! 4 modes de jeu, 210+ pathologies." />
+    <meta name="twitter:image" content="https://nurse-dle.netlify.app/og-image.png" />
+    <meta name="twitter:image:alt" content="Nurse-dle — Jeu de devinette de pathologies pour étudiants infirmiers" />
+
+    <!-- Thème & PWA -->
+    <meta name="theme-color" content="#667eea" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Nurse-dle" />
+    <meta name="application-name" content="Nurse-dle" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Données structurées JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Nurse-dle",
+      "url": "https://nurse-dle.netlify.app/",
+      "description": "Jeu de devinette quotidien de pathologies pour étudiants infirmiers. Testez vos connaissances avec 210+ pathologies et 4 modes de jeu.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript",
+      "inLanguage": "fr",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Nurse-dle"
+      },
+      "genre": ["Éducation", "Quiz médical", "Jeu de devinette"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student",
+        "audienceType": "Étudiants infirmiers"
+      },
+      "educationalAlignment": {
+        "@type": "AlignmentObject",
+        "alignmentType": "teaches",
+        "educationalFramework": "Études infirmières",
+        "targetName": "Pathologies"
+      }
+    }
+    </script>
+
+    <!-- Données structurées FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Qu'est-ce que Nurse-dle ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nurse-dle est un jeu de devinette quotidien inspiré de Wordle, conçu pour les étudiants infirmiers. Il propose de deviner des pathologies à travers différents modes de jeu."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Combien de pathologies sont disponibles ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nurse-dle contient plus de 210 pathologies couvrant les principaux domaines de la santé enseignés en IFSI."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quels sont les modes de jeu disponibles ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nurse-dle propose 4 modes de jeu : le Mode Classique (comparaison de caractéristiques), le Mode Citation (à partir de citations de patients), le Mode Emoji (à partir d'émojis) et le Mode Duel (multijoueur en temps réel)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Est-ce que Nurse-dle est gratuit ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, Nurse-dle est entièrement gratuit et accessible à tous les étudiants infirmiers."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- Preconnect pour les performances -->
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+
+    <!-- AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3185416709429781"
      crossorigin="anonymous"></script>
   </head>
   <body>
+    <noscript>
+      <div style="padding: 2rem; text-align: center; font-family: sans-serif;">
+        <h1>Nurse-dle</h1>
+        <p>Nurse-dle est un jeu de devinette quotidien de pathologies pour étudiants infirmiers.</p>
+        <p>Veuillez activer JavaScript pour jouer à Nurse-dle.</p>
+        <p>Testez vos connaissances sur plus de 210 pathologies avec 4 modes de jeu : Classique, Citation, Emoji et Duel multijoueur.</p>
+      </div>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

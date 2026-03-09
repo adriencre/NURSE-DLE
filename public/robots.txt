@@ -1,0 +1,8 @@
+# Nurse-dle - robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin
+
+# Sitemap
+Sitemap: https://nurse-dle.netlify.app/sitemap.xml
+

@@ -50,8 +50,8 @@ function Menu({ onSelectMode, onOpenLeaderboard, onOpenProfile, onOpenAuth }) {
   ];
 
   return (
-    <div className="menu-container">
-      <div className="game-description">
+    <div className="menu-container" role="main">
+      <section className="game-description" aria-label="Présentation du jeu">
         <h2 className="game-title">Nurse-dle</h2>
         <p className="game-subtitle">
           Le jeu de devinette pour étudiants infirmiers
@@ -62,17 +62,17 @@ function Menu({ onSelectMode, onOpenLeaderboard, onOpenProfile, onOpenAuth }) {
             Chaque mode de jeu propose sa propre pathologie quotidienne. Relevez les 4 défis chaque jour 
             pour améliorer vos compétences cliniques.
           </p>
-          <div className="game-features">
-            <span className="feature-item">🎯 4 pathologie par jour (1 par mode)</span>
-            <span className="feature-item">📚 210 pathologies disponibles</span>
-            <span className="feature-item">💾 Progression sauvegardée</span>
-            <span className="feature-item">🔄 Nouveau défi quotidien</span>
+          <div className="game-features" role="list">
+            <span className="feature-item" role="listitem">🎯 4 pathologie par jour (1 par mode)</span>
+            <span className="feature-item" role="listitem">📚 210 pathologies disponibles</span>
+            <span className="feature-item" role="listitem">💾 Progression sauvegardée</span>
+            <span className="feature-item" role="listitem">🔄 Nouveau défi quotidien</span>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Actions rapides */}
-      <div className="menu-actions">
+      <nav className="menu-actions" aria-label="Actions rapides">
         <button
           className="menu-action-btn menu-action-leaderboard"
           onClick={onOpenLeaderboard}
@@ -87,9 +87,9 @@ function Menu({ onSelectMode, onOpenLeaderboard, onOpenProfile, onOpenAuth }) {
           <User size={20} />
           {user ? 'Mon Profil' : 'Se connecter'}
         </button>
-      </div>
+      </nav>
 
-      <div className="menu-grid">
+      <section className="menu-grid" aria-label="Modes de jeu">
         {modes.map((mode) => {
           const Icon = mode.icon;
           return (
@@ -97,6 +97,11 @@ function Menu({ onSelectMode, onOpenLeaderboard, onOpenProfile, onOpenAuth }) {
               key={mode.id}
               className={`menu-card ${!mode.available ? 'menu-card-disabled' : ''}`}
               onClick={() => mode.available && onSelectMode(mode.id)}
+              role="button"
+              tabIndex={mode.available ? 0 : -1}
+              aria-label={`${mode.name} : ${mode.comingSoon ? 'En développement' : mode.description}`}
+              aria-disabled={!mode.available}
+              onKeyDown={(e) => e.key === 'Enter' && mode.available && onSelectMode(mode.id)}
             >
               <div className="menu-card-icon" style={{ background: mode.available ? `linear-gradient(135deg, ${mode.color} 0%, ${mode.color}dd 100%)` : 'rgba(100, 100, 100, 0.3)' }}>
                 <Icon size={32} />
@@ -108,7 +113,7 @@ function Menu({ onSelectMode, onOpenLeaderboard, onOpenProfile, onOpenAuth }) {
             </div>
           );
         })}
-      </div>
+      </section>
 
       {/* Publicité en bas du menu */}
       <AdSense format="horizontal" slot="1234567890" />

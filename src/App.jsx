@@ -11,6 +11,7 @@ import AdminPanel from './components/AdminPanel';
 import AuthModal from './components/AuthModal';
 import Leaderboard from './components/Leaderboard';
 import UserProfile from './components/UserProfile';
+import SEOHead from './components/SEOHead';
 import { useAuth } from './contexts/useAuth';
 import './App.css';
 
@@ -74,6 +75,50 @@ function App() {
     }
   };
 
+  const getSEOData = () => {
+    if (showLeaderboard) {
+      return {
+        title: 'Classement — Nurse-dle',
+        description: 'Consultez le classement des meilleurs joueurs de Nurse-dle. Comparez vos scores avec les autres étudiants infirmiers.',
+      };
+    }
+    if (showProfile) {
+      return {
+        title: 'Mon Profil — Nurse-dle',
+        description: 'Consultez votre profil, vos statistiques et votre progression sur Nurse-dle.',
+      };
+    }
+    switch (currentMode) {
+      case 'classic':
+        return {
+          title: 'Mode Classique — Nurse-dle | Devinez la pathologie du jour',
+          description: 'Devinez la pathologie du jour en comparant les caractéristiques. Mode classique de Nurse-dle pour tester vos connaissances en pathologie.',
+        };
+      case 'quote':
+        return {
+          title: 'Mode Citation — Nurse-dle | Devinez la pathologie à partir d\'une citation',
+          description: 'Devinez la pathologie à partir d\'une citation de patient. Mode Citation de Nurse-dle pour étudiants infirmiers.',
+        };
+      case 'emoji':
+        return {
+          title: 'Mode Emoji — Nurse-dle | Devinez la pathologie à partir d\'émojis',
+          description: 'Devinez la pathologie à partir d\'émojis. Mode Emoji de Nurse-dle, un défi amusant pour étudiants infirmiers.',
+        };
+      case 'duel':
+        return {
+          title: 'Mode Duel — Nurse-dle | Affrontez vos amis en temps réel',
+          description: 'Affrontez vos amis en duel multijoueur en temps réel ! Jusqu\'à 10 joueurs par partie sur Nurse-dle.',
+        };
+      case 'image':
+        return {
+          title: 'Mode Image — Nurse-dle | Devinez la pathologie à partir d\'une image',
+          description: 'Devinez la pathologie à partir d\'une image floutée. Mode Image de Nurse-dle (bientôt disponible).',
+        };
+      default:
+        return {};
+    }
+  };
+
   const renderMode = () => {
     if (showAdmin) {
       return <AdminPanel />;
@@ -110,6 +155,7 @@ function App() {
 
   return (
     <div className="app">
+      <SEOHead {...getSEOData()} />
       <Header
         showBack={currentMode !== null || showAdmin || showLeaderboard || showProfile}
         onBack={handleBackToMenu}
